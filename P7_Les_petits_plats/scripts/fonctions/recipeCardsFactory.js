@@ -1,4 +1,3 @@
-// Modern
 function recipeCardsFactory(recette) {
     function getRecipeCardDOM() {
         // Je prends la div qui va contenir les vignettes.
@@ -35,13 +34,13 @@ function recipeCardsFactory(recette) {
 
             </article>`;
 
-        // j'insere les blocs tant qu'il y en à l'un après l'autre
+        // J'insere les blocs tant qu'il y en à l'un après l'autre.
         recipeList.insertAdjacentHTML('beforeEnd', articleRecipie);
     }
 
     getRecipeCardDOM();
 
-    // Je boucle sur le tableau d'ingrédients pour les afficher 1 par 1
+    // Je boucle sur le tableau d'ingrédients pour les afficher 1 par 1.
     recette.ingredients.forEach((ingredient) => {
         let listeIngrédients = document.querySelector('#ingredients-' + recette.id);
 
