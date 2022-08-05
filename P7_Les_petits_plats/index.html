@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon_LogoPetitsPlats.png" />
+
+        <title>Les Petits Plats</title>
+
+        <!-- google fonts lato / roboto -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Icones-->
+        <script src="https://kit.fontawesome.com/f6e970777d.js" crossorigin="anonymous"></script>
+
+        <!-- CSS Bootstrap 5.2 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+        />
+
+        <!-- JS Bootstrap 5.2 -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- icones bootstrap 5.2-->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+        />
+
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <header class="d-flex justify-content-center mb-5" id="header">
+            <img src="assets/images/logo.png" class="logo" alt="Les Petits Plats" />
+        </header>
+
+        <main class="container-fluid px-5">
+            <!-- barre de recherche -->
+            <div class="search-bar d-flex mb-4">
+                <input
+                    id="searchinput"
+                    type="search"
+                    placeholder="Rechercher une recette"
+                    aria-label="Search"
+                />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+
+            <!-- affichage des filtres actifs -->
+            <div class="filtres-actifs mb-5 d-flex flex-wrap">
+                <!-- ici s'affichent les tags -->
+            </div>
+
+            <!-- 3 dropdown de filtres -->
+            <nav class="mb-5 px-3 row">
+                <!-- INGREDIENTS -->
+                <div class="dropdowns bg-bleu rounded-top rounded-bottom col-xl-2 col-lg-3">
+                    <div class="dropBtnIngr dropdown-input">
+                        <input
+                            class="dropbtn py-4 test"
+                            id="input-ingredients"
+                            type="text"
+                            placeholder="Ingredients"
+                        />
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-up d-none"></i>
+                    </div>
+
+                    <div class="dropdown-content rounded-bottom row bg-bleu pb-3" id="ingredients">
+                        <!-- items ingredients -->
+                    </div>
+                </div>
+
+                <!-- APPAREILS -->
+                <div class="dropdowns bg-vert rounded-top rounded-bottom col-xl-2 col-lg-3">
+                    <div class="dropBtnApp dropdown-input">
+                        <input
+                            class="dropbtn py-4"
+                            id="input-appareils"
+                            type="text"
+                            placeholder="Appareils"
+                        />
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-up d-none"></i>
+                    </div>
+
+                    <div class="dropdown-content rounded-bottom row bg-vert pb-3" id="appareils">
+                        <!-- items appareils -->
+                    </div>
+                </div>
+
+                <!-- USTENSILES -->
+                <div class="dropdowns bg-rouge rounded-top rounded-bottom col-xl-2 col-lg-3">
+                    <div class="dropBtnUst dropdown-input">
+                        <input
+                            class="dropbtn py-4"
+                            id="input-ustensiles"
+                            type="text"
+                            placeholder="Ustensiles"
+                        />
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-up d-none"></i>
+                    </div>
+
+                    <div class="dropdown-content rounded-bottom row bg-rouge pb-3" id="ustensiles">
+                        <!-- items ustensiles -->
+                    </div>
+                </div>
+            </nav>
+
+            <!-- articles recettes -->
+            <div class="row mb-2 justify-content-center g-4" id="wrapper-recettes">
+                <!-- les articles s'affichent ici -->
+            </div>
+
+            <!-- pas de recette trouvée -->
+            <div class="no-recipies d-none">
+                <p class="text-danger text-center">
+                    Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes »,
+                    « poisson », etc.
+                </p>
+            </div>
+        </main>
+
+        <!-- fleche de retour en haut de page -->
+        <a class="return-top" href="#header"><i class="bi bi-arrow-up-square-fill"></i></a>
+
+        <script src="datas/recettes.js"></script>
+
+        <script src="scripts/fonctions/recipeCardsFactory.js"></script>
+
+        <script src="scripts/fonctions/getDatas.js"></script>
+    </body>
+</html>
