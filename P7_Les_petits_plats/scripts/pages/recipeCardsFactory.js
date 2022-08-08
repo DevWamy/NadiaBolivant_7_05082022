@@ -34,7 +34,7 @@ function recipeCardsFactory(recette) {
 
             </article>`;
 
-        // J'insere les blocs tant qu'il y en à l'un après l'autre.
+        // J'insere les blocs tant qu'il y en a l'un après l'autre.
         recipeList.insertAdjacentHTML('beforeEnd', articleRecipie);
     }
 
