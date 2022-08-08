@@ -5,7 +5,7 @@ function recipeCardsFactory(recette) {
 
         // Je crée le bloc article des recettes.
         const articleRecipie = `
-            <article class="col-xl-4 col-md-6 article-recette" id="cardRecipe">
+            <article class="col-xl-4 col-md-6 py-4 px-0 article-recette id="cardRecipe">
 
                 <div class="card">
 
@@ -13,7 +13,7 @@ function recipeCardsFactory(recette) {
 
                         <div class="row descriptif p-3 ">
 
-                            <h5 class="col-md-7 titre mb-3 d-flex align-items-center">${recette.name}</h5>
+                            <h5 class="col-md-7 titre mb-2 d-flex align-items-center">${recette.name}</h5>
 
                             <div class="col-md-5 time mb-3 d-flex align-items-center justify-content-end">
                                 <i class="bi bi-clock"></i> &nbsp;
@@ -24,7 +24,7 @@ function recipeCardsFactory(recette) {
 
                             </ul>
 
-                            <p class="col-md-6 texte">${recette.description.substring(0, 160) + '...'}</p>
+                            <p class="col-md-6 texte">${recette.description.substring(0, 170) + '...'}</p>
 
                             <p class="col-md-12 texte d-none">Appareil recommandé ${recette.appliance}</p>
                             <p class="col-md-12 texte d-none">Ustensile recommandé ${recette.ustensils}</p>

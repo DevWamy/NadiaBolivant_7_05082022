@@ -6,17 +6,17 @@ const displayRecipes = (recipes) => {
     });
 };
 
-// Boucle sur les données
+// Boucle sur les données.
 async function init() {
-    // Affichage par défaut de toutes les recettes au chargement de la page
+    // Affichage par défaut de toutes les recettes au chargement de la page.
     displayRecipes(recipes);
 }
 
 init();
 
-// appel de la boucle pour les cards de recette
+// Appel de la boucle pour les cards de recette.
 function generateCards(recettes) {
-    // je parcours les recettes
+    // Je parcours les recettes.
     recettes.forEach((recette) => {
         recipeCardsFactory(recette);
     });

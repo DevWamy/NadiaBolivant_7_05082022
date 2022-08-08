@@ -160,11 +160,16 @@ body {
 
 #wrapper-recettes {
     width: 100%;
+    margin: 0;
+}
+
+#cardRecipe {
+    height: 100%;
+    margin-bottom: 20px;
 }
 
 .card {
-    width: 345px;
-    text-overflow: ellipsis;
+    width: 380px;
     border: none;
 }
 
@@ -198,14 +203,12 @@ body {
     list-style: none;
     font-size: 12px;
     font-weight: 400;
-    max-height: 150px;
 }
 
 .texte {
     font-size: 12px;
     font-family: 'Roboto', sans-serif;
     max-height: 150px;
-    text-overflow: ellipsis;
 }
 
 /* --------------------------------------------------------------------------------- */
