@@ -4,7 +4,7 @@ function recipeCardsFactory(recette) {
         const recipeList = document.querySelector('#wrapper-recettes');
 
         // Je crée le bloc article des recettes.
-        const articleRecipie = `
+        const articleRecipe = `
             <article class="col-xl-4 col-md-6 py-4 px-0 article-recette id="cardRecipe">
 
                 <div class="card">
@@ -35,7 +35,7 @@ function recipeCardsFactory(recette) {
             </article>`;
 
         // J'insere les blocs tant qu'il y en a l'un après l'autre.
-        recipeList.insertAdjacentHTML('beforeEnd', articleRecipie);
+        recipeList.insertAdjacentHTML('beforeEnd', articleRecipe);
     }
 
     getRecipeCardDOM();
