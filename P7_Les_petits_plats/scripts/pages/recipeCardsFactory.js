@@ -1,4 +1,6 @@
+//Je créé une fonction
 function recipeCardsFactory(recette) {
+    //Dans celle-ci, je créé une autre fonction avec avec des paramètres que je détermine.
     function getRecipeCardDOM() {
         // Je prends la div qui va contenir les vignettes.
         const recipeList = document.querySelector('#wrapper-recettes');
@@ -34,32 +36,42 @@ function recipeCardsFactory(recette) {
 
             </article>`;
 
-        // J'insere les blocs tant qu'il y en a l'un après l'autre.
+        // J'insere donc articleRecipe à l'intérieur de la liste de recette après la dernière affichée.
         recipeList.insertAdjacentHTML('beforeEnd', articleRecipe);
     }
 
+    //Je joue la fonction de la carte (getRecipeCardDOM)
     getRecipeCardDOM();
 
     // Je boucle sur le tableau d'ingrédients pour les afficher 1 par 1.
+    //Pour chaque ingrédient de la recette,
     recette.ingredients.forEach((ingredient) => {
+        //Je créé une liste d'ingrédient en selectionnant l'ul qui listera les ingr (qui est construit dans articleRecipe).
+        //Et j'ajoutela recette concernée(recette.id).
         let listeIngrédients = document.querySelector('#ingredients-' + recette.id);
 
+        //Je créé 3 variable (1 pour chaque type).
         let varIngredient = ingredient.ingredient;
         let varQuantity = ingredient.quantity;
         let varUnit = ingredient.unit;
+        //Ainsi, j'afficherai l'ingr, la quantité et l'unité pour la recette concernée).
 
+        //Si la quantité n'est pas définie, (undefined) alors, on affichera: "vide".
         if (varQuantity == undefined) {
             varQuantity = '';
         }
 
+        //Si l'unité est tout à fait similaire à undefined alors on affichera "vide".
         if (varUnit === undefined) {
             varUnit = '';
         }
 
+        //Je créé une liste d'items et j'y intègre du HTML.
+        //Une liste avec li, strong pour l'affichage en gras, l'ingr concerné par la recette ainsi que la quantité et l'unité.
         const listeItem = `
                 <li><strong>${varIngredient} :</strong> ${varQuantity} ${varUnit}</li>
             `;
-
+        //J'insère la liste des items à l'intérieur de la liste d'ingr après le dernier affiché.
         listeIngrédients.insertAdjacentHTML('beforeEnd', listeItem);
     });
 }

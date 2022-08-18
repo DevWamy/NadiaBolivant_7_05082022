@@ -162,12 +162,12 @@ body {
 /* articles des recettes */
 
 #wrapper-recettes {
-    width: 100%;
+    width: 104%;
     margin: 0;
 }
 
 #cardRecipe {
-    height: 100%;
+    height: 10%;
     margin-bottom: 20px;
 }
 

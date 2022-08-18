@@ -6,6 +6,9 @@ async function init() {
     // Affichage par défaut de toutes les recettes au chargement de la page.
     displayRecipes(recipes);
 
+    // tri par mot clé
+    searchInput();
+
     // J'initialise le tri des items(recette, type, tag filtré dans un tableau).
     displayDropdownItems(recipes, 'ingredients', tagFiltered);
 
@@ -31,7 +34,7 @@ function normalizeString(string) {
     const spaceRegex = new RegExp(/\s/, 'g');
     return string
         .normalize('NFD') // renvoie la chaîne sous forme Unicode normalisée avec décomposition des signes diacritiques (accents, trémas, cédilles, etc.)
-        .replace(diacriticRegex, '') // supprime les signes diacritiques(accents, trémas, cédilles, etc.).
+        .replace(diacriticRegex, '') // Supprime les signes diacritiques(accents, trémas, cédilles, etc.).
         .toLowerCase()
         .replace(spaceRegex, ''); // Supprime tous les espaces.
 }
@@ -45,6 +48,7 @@ function generateItems(array, itemBlock, type) {
         //Je normalise les items(maj min accents espaces...)
         itemNormalized = normalizeString(item);
         //Je créé les paramètres d'affichage.
+        //Au clic, le tag s'ajoute.
         const itemsDOM = `<div class="col-3 item-${itemNormalized}" onclick="addTag('${item}', '${type}')">${item}</div>`;
         //J'ajoute chacun un à un les un après les autres.
         itemBlock.insertAdjacentHTML('beforeEnd', itemsDOM);
@@ -53,7 +57,7 @@ function generateItems(array, itemBlock, type) {
 // Gestion des animations sur les dropdowns.
 
 // J'attend que la page se charge avant de travailler avec des éléments HTML.
-window.addEventListener('load', function () {
+window.addEventListener('load', () => {
     //A l'évènement clic:
     document.addEventListener('click', function (event) {
         // Pour chaque dropdown,
