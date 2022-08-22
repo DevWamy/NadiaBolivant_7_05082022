@@ -39,21 +39,27 @@ function normalizeString(string) {
         .replace(spaceRegex, ''); // Supprime tous les espaces.
 }
 
-//DROPDOWNS
-
-// Je créé une fonction qui genere les items de chaque dropdown(tableau,bloc d'item et type).
+//Je créé une fonction qui génère les items de chaque dropdown(tableau, bloc d'item et type).
 function generateItems(array, itemBlock, type) {
     //Pour chaque tableau:
     array.forEach((item) => {
         //Je normalise les items(maj min accents espaces...)
         itemNormalized = normalizeString(item);
         //Je créé les paramètres d'affichage.
+        //Je créé une section qui intégrera les tags.
+        const itemsDOM = document.createElement('div');
+        //J'ajoute une classe avec les params d'affichage et l'item sera normalisé.
+        itemsDOM.classList = `col-3 item-${itemNormalized}`;
         //Au clic, le tag s'ajoute.
-        const itemsDOM = `<div class="col-3 item-${itemNormalized}" onclick="addTag('${item}', '${type}')">${item}</div>`;
+        itemsDOM.addEventListener('click', () => addTag(item, type));
+        //J'affiche les items à l'écran.
+        itemsDOM.innerHTML = item;
+
         //J'ajoute chacun un à un les un après les autres.
-        itemBlock.insertAdjacentHTML('beforeEnd', itemsDOM);
+        itemBlock.appendChild(itemsDOM);
     });
 }
+
 // Gestion des animations sur les dropdowns.
 
 // J'attend que la page se charge avant de travailler avec des éléments HTML.
@@ -126,7 +132,7 @@ function tagFilter(tagFiltered) {
         tagFiltered.forEach((tag) => {
             //La variable correspondra à un tableau filtré par recette.
             recipesFiltered = recipesFiltered.filter((recette) => {
-                // Je fais un lowercase sur tag.value pour bien comparer ensuite.
+                // Je met en minuscule la valeur du tag pour bien comparer ensuite.
                 tag.value = tag.value.toLowerCase();
 
                 // INGREDIENTS
@@ -223,13 +229,40 @@ function addTag(itemTag, type) {
     itemTagNormalized = normalizeString(itemTag);
 
     //Je créé les paramètres d'affichage.
-    const tagItemDOM = `<div class="rounded p-2 mb-3 tag-${type} tag-${itemTagNormalized}" data-type="${type}" data-value="${itemTag}">${itemTag} &nbsp;<i class="bi bi-x-circle" onclick="removeTag('${type}', '${itemTag}')"></i></div>`;
-
-    // Je créé une variable qui prendra le bloc qui contiendra les tags.
+    //Je créé une section qui intégrera les tags.
+    const tagItemDOM = document.createElement('div');
+    //J'ajoute une classe avec les params d'affichage et l'item sera normalisé.
+    tagItemDOM.classList = `rounded p-2 mb-3 tag-${type} tag-${itemTagNormalized.replace(
+        /[&\/\\#,+()$~%.'":*?<>{}]/g,
+        '',
+    )}`;
+    //J'ajoute un type.
+    tagItemDOM.dataset.type = `${type}`;
+    //J'ajoute une valeur.
+    tagItemDOM.dataset.value = `${itemTag}`;
+    //Je créé une section qui contiendra la croix.
+    const crossItemDOM = document.createElement('i');
+    //Je lui ajoute la classe correspondant à la croix dans Bootstrap.
+    crossItemDOM.classList = 'bi bi-x-circle';
+    //J'affiche l'item ainsi qu'un espace non seccable (qui ne se reduit pas).
+    tagItemDOM.innerHTML = `${itemTag} &nbsp`;
+    //Je dit que la croix est l'héritiere de l'endroit où sera affiché l'item.
+    tagItemDOM.appendChild(crossItemDOM);
+    //Je déclare où se trouve le tag actuel.
     let currentTag = document.querySelector('.filtres-actifs');
+    //Et il herite de tagItemDOM.
+    currentTag.appendChild(tagItemDOM);
+    // const crossItemDOM = document.createElement('i');
+    // crossItemDOM.classList = 'bi bi-x-circle';
+    // tagItemDOM.innerHTML = `${itemTag} &nbsp`;
+    // tagItemDOM.appendChild(crossItemDOM);
+    crossItemDOM.addEventListener('click', () => {
+        removeTag(type, itemTag);
+    });
+    //J'ajoute chacun des nouveaux tags un à un les un après les autres.
+    // currentTag.insertAdjacentHTML('beforeEnd', tagItemDOM);
 
-    //J'ajoute chacun des nouveaux tags les un à un les un après les autres.
-    currentTag.insertAdjacentHTML('beforeEnd', tagItemDOM);
+    // const tagItemDOM = document.createElement('div');
 
     // J'ajoute à la suite chaque nouveau tag en objet dans le tableau tagFiltered.
     tagFiltered.push({
@@ -250,7 +283,9 @@ function removeTag(type, value) {
     valueClass = normalizeString(value);
 
     //Je recherche les elements qui se trouvent dans filtres-actifs, dans tag- j'ajoute la valueClass et je supprime.
-    document.querySelector('.filtres-actifs .tag-' + valueClass).remove();
+    document
+        .querySelector('.filtres-actifs .tag-' + valueClass.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''))
+        .remove();
 
     //tagFiltered correspond  au tag du tableau tagFiltered qui est maintenant filtré de cette facon: la valeur de tag ne correspond pas à la valeur.
     tagFiltered = tagFiltered.filter((tag) => tag.value !== value);
