@@ -20,13 +20,13 @@ async function init() {
 init();
 
 //Je créé une fonction qui génère les cartes recettes.
-function generateCards(recettes) {
+const generateCards = (recettes) => {
     // Pour chaque recette,
     recettes.forEach((recette) => {
         //Je joue la fonction qui créé les cartes de chaque recette.
         recipeCardsFactory(recette);
     });
-}
+};
 
 //Fonction de normalisation des items.
 function normalizeString(string) {
@@ -38,6 +38,7 @@ function normalizeString(string) {
         .toLowerCase()
         .replace(spaceRegex, ''); // Supprime tous les espaces.
 }
+console.log(normalizeString);
 
 //Je créé une fonction qui génère les items de chaque dropdown(tableau, bloc d'item et type).
 function generateItems(array, itemBlock, type) {
@@ -65,9 +66,9 @@ function generateItems(array, itemBlock, type) {
 // J'attend que la page se charge avant de travailler avec des éléments HTML.
 window.addEventListener('load', () => {
     //A l'évènement clic:
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', (event) => {
         // Pour chaque dropdown,
-        document.querySelectorAll('.dropdowns').forEach(function (element) {
+        document.querySelectorAll('.dropdowns').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
             if (element !== event.target) {
                 element.classList.remove('col-lg-7');
@@ -77,7 +78,7 @@ window.addEventListener('load', () => {
             }
         });
         // Je cache le dropdown à ceux qui ne sont pas cliqués.
-        document.querySelectorAll('.dropdown-content').forEach(function (element) {
+        document.querySelectorAll('.dropdown-content').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
             if (element !== event.target) {
                 //Je retire la classe show.
@@ -86,7 +87,7 @@ window.addEventListener('load', () => {
         });
         //JE DOIS RETRAVAILLER CA FLECHE KO.
         // Pour chaque fleche up:
-        document.querySelectorAll('.dropbtn .fa-chevron-up').forEach(function (element) {
+        document.querySelectorAll('.dropbtn .fa-chevron-up').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
             if (element !== event.target) {
                 //J'ajoute la classe hide.
@@ -95,7 +96,7 @@ window.addEventListener('load', () => {
         });
         //JE DOIS RETRAVAILLER CA FLECHE KO.
         // Pour chaque fleche down.
-        document.querySelectorAll('.dropbtn .fa-chevron-down').forEach(function (element) {
+        document.querySelectorAll('.dropbtn .fa-chevron-down').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
             if (element !== event.target) {
                 //Je retire la classe hide.
@@ -122,7 +123,7 @@ window.addEventListener('load', () => {
 // GESTION DES TAGS
 
 //Je créé une fonction qui permet de gérer les tags.
-function tagFilter(tagFiltered) {
+const tagFilter = (tagFiltered) => {
     //Je créé une variable qui implique les recettes.
     let recipesFiltered = recipes;
 
@@ -140,7 +141,7 @@ function tagFilter(tagFiltered) {
                 if (tag.type == 'ingredients') {
                     //Je créé une variable qui donnera la valeur fausse.
                     let ingredientfounded = false;
-                    //On parcours le tableau rec.ingri=  quand i est inf la taille du tableau recette.ingredients, on ajoute 1.
+                    //On parcours le tableau rec.ingr.  quand i est inf la taille du tableau recette.ingredients, on ajoute 1.
                     for (let i = 0; i < recette.ingredients.length; i++) {
                         //Si l'ingredient en minuscule(i) correspond à la valeur du tag,
                         if (recette.ingredients[i].ingredient.toLowerCase() == tag.value) {
@@ -218,13 +219,13 @@ function tagFilter(tagFiltered) {
     displayDropdownItems(recipesFiltered, 'ustensiles', tagFiltered);
     //Je joue la fonction errorMessage pour les recettes filtrées.
     errorMessage(recipesFiltered);
-}
+};
 
 // AJOUT DU TAG
 // Au clic sur un item, affichage du tag sur la page et ajout à la suite dans le tableau.
 
 //Fonction qui ajoute un tag et un type
-function addTag(itemTag, type) {
+const addTag = (itemTag, type) => {
     // Je cree une variable qui correspondra aux tag qui seront "normalisés"(sans accents, sans espace, ... )
     itemTagNormalized = normalizeString(itemTag);
 
@@ -272,10 +273,10 @@ function addTag(itemTag, type) {
 
     //Je joue la fonction tagFilter(tagFiltered)
     tagFilter(tagFiltered);
-}
+};
 
 //Fonction qui supprime les tags.
-function removeTag(type, value) {
+const removeTag = (type, value) => {
     //Je met tout en minuscules.
     value = value.toLowerCase();
 
@@ -292,10 +293,10 @@ function removeTag(type, value) {
 
     //On joue la fonction tagfilter.
     tagFilter(tagFiltered);
-}
+};
 
 //Fonction qui affichera un message d'erreur
-function errorMessage(recettes) {
+const errorMessage = (recettes) => {
     // si il n'y à aucune recette trouvée j'affiche un message d'erreur
     if (recettes.length == 0) {
         //Je retire la classe "hide" à la section de classe "no-recipes".
@@ -304,4 +305,4 @@ function errorMessage(recettes) {
         //Sinon j'ajoute la section "hide" à la section de classe "no-recipes".
         document.querySelector('.no-recipes').classList.add('hide');
     }
-}
+};

@@ -3,6 +3,15 @@ let dropIngredients = document.querySelector('#ingredients');
 let dropUstensiles = document.querySelector('#ustensiles');
 let dropAppareils = document.querySelector('#appareils');
 
+// je récupere le champ de recherche ingredient
+let inputIngredient = document.querySelector('#input-ingredients');
+
+// je récupere le champ de recherche appareil
+let inputAppareils = document.querySelector('#input-appareils');
+
+// je récupere le champ de recherche ustensile
+let inputUstensiles = document.querySelector('#input-ustensiles');
+
 // J'initialise un tableau vide qui contiendra la liste des ingrédients.
 let tabIngredients = [];
 
@@ -14,7 +23,7 @@ let tabUstensiles = [];
 
 // AFFICHAGE INITIAL
 // affichage des items dans leurs dropdown respectifs
-function displayDropdownItems(recipes, types, tagFiltered) {
+const displayDropdownItems = (recipes, types, tagFiltered) => {
     //J'évalue les types.
     switch (types) {
         // Dans le cas des ingredients.
@@ -144,4 +153,82 @@ function displayDropdownItems(recipes, types, tagFiltered) {
 
             break;
     }
-}
+};
+
+// ENTONOIR DE RECHERCHE INGREDIENT APPAREIL USTENSILES DANS LE DROPDOWN
+// rafraichi les ingredients en entonoir en cherchant par mot clé dans le dropdown
+const inputSearchIngredient = () => {
+    // A l'input dans le dropdown ingrédients:
+    inputIngredient.addEventListener('input', () => {
+        // Je récupere la valeur de l'input et je passe en minuscule.
+        let searchIngredient = inputIngredient.value.toLowerCase();
+
+        // Je supprime les ingrédients affichés avant de reboucler dessus et refaire un affichage filtré.
+        document.querySelectorAll('#ingredients div').forEach((elt) => {
+            elt.remove();
+        });
+
+        // Je filtre sur tabingredients.
+        let ingredientsFiltered = tabIngredients.filter((item) => {
+            //Si l'item en min inclus la valeur précedente,
+            if (item.toLowerCase().includes(searchIngredient)) {
+                //je retourne item.
+                return item;
+            }
+        });
+
+        // Je boucle sur chaque ingrédient.
+        generateItems(ingredientsFiltered, dropIngredients, 'ingredients');
+    });
+};
+inputSearchIngredient();
+
+// rafraichi les appareils en entonoir en cherchant par mot clé dans le dropdown
+const inputSearchAppareils = () => {
+    // A l'input dans le dropdown appareils:
+    inputAppareils.addEventListener('input', function () {
+        // Je récupere la valeur de l'input et je passe en minuscule.
+        let searchAppareils = inputAppareils.value.toLowerCase();
+
+        // Je supprime les appareils affichés avant de reboucler dessus et refaire un affichage filtré.
+        document.querySelectorAll('#appareils div').forEach((elt) => {
+            elt.remove();
+        });
+
+        // Je filtre sur tabAppareils.
+        let appareilsFiltered = tabAppareils.filter((item) => {
+            if (item.toLowerCase().includes(searchAppareils)) {
+                return item;
+            }
+        });
+
+        // Je boucle sur chaque appareil et je reaffiche les appareils triés par nom.
+        generateItems(appareilsFiltered, dropAppareils, 'appareils');
+    });
+};
+inputSearchAppareils();
+
+// Rafraichi les ustensiles en entonoir en chechant par mot clé dans le dropdown.
+const inputSearchUstensiles = () => {
+    //  A l'input dans le dropdown ustensiles.
+    inputUstensiles.addEventListener('input', function () {
+        // Je récupere la valeur de l'input et je passe en minuscule.
+        let searchUstensile = inputUstensiles.value.toLowerCase();
+
+        // Je supprime les ustensiles affichés avant de reboucler dessus et refaire un affichage filtré.
+        document.querySelectorAll('#ustensiles div').forEach((elt) => {
+            elt.remove();
+        });
+
+        // Je filtre sur tabUstensiles.
+        let ustensilesFiltered = tabUstensiles.filter((item) => {
+            if (item.toLowerCase().includes(searchUstensile)) {
+                return item;
+            }
+        });
+
+        // Je boucle sur chaque ustensile et je reaffiche les ustensiles triés par nom.
+        generateItems(ustensilesFiltered, dropUstensiles, 'ustensiles');
+    });
+};
+inputSearchUstensiles();

@@ -1,7 +1,7 @@
 //Je créé une fonction
-function recipeCardsFactory(recette) {
+const recipeCardsFactory = (recette) => {
     //Dans celle-ci, je créé une autre fonction avec avec des paramètres que je détermine.
-    function getRecipeCardDOM() {
+    const getRecipeCardDOM = () => {
         // Je prends la div qui va contenir les vignettes.
         const recipeList = document.querySelector('#wrapper-recettes');
 
@@ -38,7 +38,7 @@ function recipeCardsFactory(recette) {
 
         // J'insere donc articleRecipe à l'intérieur de la liste de recette après la dernière affichée.
         recipeList.insertAdjacentHTML('beforeEnd', articleRecipe);
-    }
+    };
 
     //Je joue la fonction de la carte (getRecipeCardDOM)
     getRecipeCardDOM();
@@ -74,4 +74,4 @@ function recipeCardsFactory(recette) {
         //J'insère la liste des items à l'intérieur de la liste d'ingr après le dernier affiché.
         listeIngrédients.insertAdjacentHTML('beforeEnd', listeItem);
     });
-}
+};

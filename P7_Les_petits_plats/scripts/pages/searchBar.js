@@ -1,9 +1,9 @@
-function searchInput() {
+const searchInput = () => {
     // Je récupere le champ de recherche.
     let searchinput = document.querySelector('#searchinput');
 
     // Je récupère sa valeur quand on entre des lettres dans l'input,
-    searchinput.addEventListener('input', function () {
+    searchinput.addEventListener('input', () => {
         //et je met tout en miniscule.
         const inputContent = normalizeString(searchinput.value);
 
@@ -22,7 +22,6 @@ function searchInput() {
                     return item;
                 }
             });
-            console.log(inputContent);
 
             // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
             document.querySelectorAll('.article-recette').forEach((element) => {
@@ -38,11 +37,16 @@ function searchInput() {
 
             displayDropdownItems(currentRecipes, 'ustensiles', tagFiltered);
 
-            //CE QUI SUIT EST A AMELIORER FONCTIONNE MAL.
-        } // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
+            //Si il y a deux caratère ou moins,
+        } else if (inputContent.length <= 2) {
+            //J'affiche toutes les recettes.
+            displayRecipes(recipes);
+        }
+
+        // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
         else {
             //Je retire la classe "hide" à la section de classe "no-recipes"
             document.querySelector('.no-recipes').classList.remove('hide');
         }
     });
-}
+};
