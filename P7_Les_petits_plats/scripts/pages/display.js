@@ -38,7 +38,6 @@ function normalizeString(string) {
         .toLowerCase()
         .replace(spaceRegex, ''); // Supprime tous les espaces.
 }
-console.log(normalizeString);
 
 //Je créé une fonction qui génère les items de chaque dropdown(tableau, bloc d'item et type).
 function generateItems(array, itemBlock, type) {

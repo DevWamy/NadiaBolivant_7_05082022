@@ -8,7 +8,7 @@ const searchInput = () => {
         const inputContent = normalizeString(searchinput.value);
 
         // Si le champ de recherche contient + de 2 caracteres,
-        if (inputContent.length > 2) {
+        if (inputContent.length >= 2) {
             // je filtre par item.
             currentRecipes = recipes.filter((item) => {
                 // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
@@ -20,6 +20,11 @@ const searchInput = () => {
                     }) != undefined
                 ) {
                     return item;
+
+                    // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
+                } else {
+                    //Je retire la classe "hide" à la section de classe "no-recipes"(pour afficher le message d'erreur).
+                    document.querySelector('.no-recipes').classList.remove('hide');
                 }
             });
 
@@ -43,10 +48,10 @@ const searchInput = () => {
             displayRecipes(recipes);
         }
 
-        // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
-        else {
-            //Je retire la classe "hide" à la section de classe "no-recipes"
-            document.querySelector('.no-recipes').classList.remove('hide');
-        }
+        // // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
+        // else {
+        //     //Je retire la classe "hide" à la section de classe "no-recipes"
+        //     document.querySelector('no-recipes').classList.remove('hide');
+        // }
     });
 };
