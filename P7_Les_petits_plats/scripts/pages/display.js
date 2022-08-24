@@ -125,7 +125,7 @@ window.addEventListener('load', () => {
 //Je créé une fonction qui permet de gérer les tags.
 const tagFilter = (tagFiltered) => {
     //Je créé une variable qui implique les recettes.
-    let recipesFiltered = recipes;
+    let recipesFiltered = currentRecipes;
 
     // Si le tableau de tags n'est pas vide je filtre selon les tags.
     if (tagFiltered.length !== 0) {
@@ -260,10 +260,6 @@ const addTag = (itemTag, type) => {
     crossItemDOM.addEventListener('click', () => {
         removeTag(type, itemTag);
     });
-    //J'ajoute chacun des nouveaux tags un à un les un après les autres.
-    // currentTag.insertAdjacentHTML('beforeEnd', tagItemDOM);
-
-    // const tagItemDOM = document.createElement('div');
 
     // J'ajoute à la suite chaque nouveau tag en objet dans le tableau tagFiltered.
     tagFiltered.push({
