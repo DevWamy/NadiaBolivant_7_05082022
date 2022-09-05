@@ -1,5 +1,70 @@
+//AFFICHAGE
+
 //J'initie un tableau vide qui sera utilisé tout au long du processus afin de filtrer les tags.
 let tagFiltered = [];
+
+let currentRecipes = [];
+
+if (currentRecipes.length == 0) {
+    currentRecipes = recipes;
+} else {
+    currentRecipes = currentRecipes;
+}
+
+//BARRE DE RECHERCHE
+
+const searchInput = () => {
+    // Je récupere le champ de recherche.
+    let searchinput = document.querySelector('#searchinput');
+
+    // Je récupère sa valeur quand on entre des lettres dans l'input,
+    searchinput.addEventListener('input', () => {
+        //et je met tout en minuscule.
+        const inputContent = normalizeString(searchinput.value);
+
+        // Si le champ de recherche contient + de 2 caracteres,
+        if (inputContent.length >= 2) {
+            // je filtre par item.
+            currentRecipes = recipes.filter((item) => {
+                // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
+                if (
+                    normalizeString(item.name).includes(inputContent) ||
+                    normalizeString(item.description).includes(inputContent) ||
+                    item.ingredients.find((element) => {
+                        return normalizeString(element.ingredient).includes(inputContent);
+                    }) != undefined
+                ) {
+                    return item;
+
+                    // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
+                } else {
+                    errorMessage(currentRecipes);
+                }
+            });
+
+            // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
+            document.querySelectorAll('.article-recette').forEach((element) => {
+                element.remove();
+            });
+
+            // Je parcours les recettes filtrées.
+            generateCards(currentRecipes);
+
+            displayDropdownItems(currentRecipes, 'ingredients', tagFiltered);
+
+            displayDropdownItems(currentRecipes, 'appareils', tagFiltered);
+
+            displayDropdownItems(currentRecipes, 'ustensiles', tagFiltered);
+
+            errorMessage(currentRecipes);
+
+            //Si il y a deux caratère ou moins,
+        } else if (inputContent.length <= 2) {
+            //J'affiche toutes les recettes.
+            displayRecipes(recipes);
+        }
+    });
+};
 
 // Boucle sur les données.
 async function init() {
@@ -10,11 +75,11 @@ async function init() {
     searchInput();
 
     // J'initialise le tri des items(recette, type, tag filtré dans un tableau).
-    displayDropdownItems(recipes, 'ingredients', tagFiltered);
+    displayDropdownItems(currentRecipes, 'ingredients', tagFiltered);
 
-    displayDropdownItems(recipes, 'appareils', tagFiltered);
+    displayDropdownItems(currentRecipes, 'appareils', tagFiltered);
 
-    displayDropdownItems(recipes, 'ustensiles', tagFiltered);
+    displayDropdownItems(currentRecipes, 'ustensiles', tagFiltered);
 }
 
 init();
@@ -196,7 +261,7 @@ const tagFilter = (tagFiltered) => {
     }
     // Sinon, (si le tableau de tags est vide) je réutilise recipes.
     else {
-        recipesFiltered = recipes;
+        recipesFiltered = currentRecipes;
     }
 
     // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
