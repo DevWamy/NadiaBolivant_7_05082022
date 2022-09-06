@@ -18,14 +18,17 @@ const searchInput = () => {
     let searchinput = document.querySelector('#searchinput');
 
     // Je récupère sa valeur quand on entre des lettres dans l'input,
-    searchinput.addEventListener('input', () => {
+    searchinput.oninput = (e) => {
+        console.log(e);
         //et je met tout en minuscule.
         const inputContent = normalizeString(searchinput.value);
-
+        if (tagFiltered.length == 0) currentRecipes = recipes;
         // Si le champ de recherche contient + de 2 caracteres,
+        let recipesFiltered = [];
         if (inputContent.length >= 2) {
+            console.log('Ceci est la recette courante', currentRecipes);
             // je filtre par item.
-            currentRecipes = recipes.filter((item) => {
+            recipesFiltered = currentRecipes.filter((item) => {
                 // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
                 if (
                     normalizeString(item.name).includes(inputContent) ||
@@ -41,6 +44,9 @@ const searchInput = () => {
                     errorMessage(currentRecipes);
                 }
             });
+            currentRecipes = new Set(currentRecipes);
+            currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
+            currentRecipes = [...currentRecipes];
 
             // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
             document.querySelectorAll('.article-recette').forEach((element) => {
@@ -59,11 +65,19 @@ const searchInput = () => {
             errorMessage(currentRecipes);
 
             //Si il y a deux caratère ou moins,
-        } else if (inputContent.length <= 2) {
+        } else if (inputContent.length <= 2 && tagFiltered.length == 0) {
             //J'affiche toutes les recettes.
             displayRecipes(recipes);
+
+            displayDropdownItems(recipes, 'ingredients', tagFiltered);
+
+            displayDropdownItems(recipes, 'appareils', tagFiltered);
+
+            displayDropdownItems(recipes, 'ustensiles', tagFiltered);
+
+            currentRecipes = recipes;
         }
-    });
+    };
 };
 
 // Boucle sur les données.
@@ -250,13 +264,16 @@ const tagFilter = (tagFiltered) => {
                             break;
                         }
                     }
-                    //Si l'ust trouvé est vrai,
+                    //Si l'ustensile trouvé est vrai,
                     if (ustensilsfounded == true) {
                         //On retourne recette.
                         return recette;
                     }
                 }
             });
+            currentRecipes = new Set(currentRecipes);
+            currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
+            currentRecipes = [...currentRecipes];
         });
     }
     // Sinon, (si le tableau de tags est vide) je réutilise recipes.
@@ -352,7 +369,25 @@ const removeTag = (type, value) => {
     tagFiltered = tagFiltered.filter((tag) => tag.value !== value);
 
     //On joue la fonction tagfilter.
-    tagFilter(tagFiltered);
+    if (tagFiltered.length != 0) {
+        tagFilter(tagFiltered);
+        displayRecipes(currentRecipes);
+
+        displayDropdownItems(currentRecipes, 'ingredients', tagFiltered);
+
+        displayDropdownItems(currentRecipes, 'appareils', tagFiltered);
+
+        displayDropdownItems(currentRecipes, 'ustensiles', tagFiltered);
+    } else {
+        displayRecipes(recipes);
+
+        displayDropdownItems(recipes, 'ingredients', tagFiltered);
+
+        displayDropdownItems(recipes, 'appareils', tagFiltered);
+
+        displayDropdownItems(recipes, 'ustensiles', tagFiltered);
+        currentRecipes = recipes;
+    }
 };
 
 //Fonction qui affichera un message d'erreur
