@@ -18,8 +18,7 @@ const searchInput = () => {
     let searchinput = document.querySelector('#searchinput');
 
     // Je récupère sa valeur quand on entre des lettres dans l'input,
-    searchinput.oninput = (e) => {
-        console.log(e);
+    searchinput.addEventListener('input', () => {
         //et je met tout en minuscule.
         const inputContent = normalizeString(searchinput.value);
         if (tagFiltered.length == 0) currentRecipes = recipes;
@@ -77,7 +76,7 @@ const searchInput = () => {
 
             currentRecipes = recipes;
         }
-    };
+    });
 };
 
 // Boucle sur les données.
