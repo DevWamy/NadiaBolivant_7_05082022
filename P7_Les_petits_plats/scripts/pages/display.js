@@ -27,40 +27,30 @@ const searchInput = () => {
         if (inputContent.length >= 2) {
             console.log('Ceci est la recette courante', currentRecipes);
             // je filtre par item.
-            // filter en for ou while ou do while ou autre
-            for(item of recipes) {
+            recipesFiltered = recipes.filter((item) => {
+                // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
                 if (
                     normalizeString(item.name).includes(inputContent) ||
                     normalizeString(item.description).includes(inputContent) ||
                     item.ingredients.find((element) => {
-                        recipesFiltered.push(normalizeString(element.ingredient).includes(inputContent));
+                        return normalizeString(element.ingredient).includes(inputContent);
                     }) != undefined
                 ) {
-                    recipesFiltered.push(item);
+                    return item;
 
                     // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
                 } else {
                     errorMessage(currentRecipes);
                 }
-            }
-                // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
-                
+            });
             currentRecipes = new Set(currentRecipes);
-            // filter en for ou while ou do while ou autre
-            const tmp = [];
-            for(recipe of new Set([...recipesFiltered])) {
-                if (currentRecipes.has(recipe)) {
-                    tmp.push(recipe);
-                }
-            }
-            currentRecipes = tmp;
+            currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
             currentRecipes = [...currentRecipes];
 
             // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
-            // forEach en for ou while ou do while ou autre
-            for (element of document.querySelectorAll('.article-recette')) {
+            document.querySelectorAll('.article-recette').forEach((element) => {
                 element.remove();
-            }
+            });
 
             // Je parcours les recettes filtrées.
             generateCards(currentRecipes);
