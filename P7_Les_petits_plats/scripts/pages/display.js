@@ -27,30 +27,40 @@ const searchInput = () => {
         if (inputContent.length >= 2) {
             console.log('Ceci est la recette courante', currentRecipes);
             // je filtre par item.
-            recipesFiltered = currentRecipes.filter((item) => {
-                // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
+            // filter en for ou while ou do while ou autre
+            for(item of recipes) {
                 if (
                     normalizeString(item.name).includes(inputContent) ||
                     normalizeString(item.description).includes(inputContent) ||
                     item.ingredients.find((element) => {
-                        return normalizeString(element.ingredient).includes(inputContent);
+                        recipesFiltered.push(normalizeString(element.ingredient).includes(inputContent));
                     }) != undefined
                 ) {
-                    return item;
+                    recipesFiltered.push(item);
 
                     // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
                 } else {
                     errorMessage(currentRecipes);
                 }
-            });
+            }
+                // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
+                
             currentRecipes = new Set(currentRecipes);
-            currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
+            // filter en for ou while ou do while ou autre
+            const tmp = [];
+            for(recipe of new Set([...recipesFiltered])) {
+                if (currentRecipes.has(recipe)) {
+                    tmp.push(recipe);
+                }
+            }
+            currentRecipes = tmp;
             currentRecipes = [...currentRecipes];
 
             // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
-            document.querySelectorAll('.article-recette').forEach((element) => {
+            // forEach en for ou while ou do while ou autre
+            for (element of document.querySelectorAll('.article-recette')) {
                 element.remove();
-            });
+            }
 
             // Je parcours les recettes filtrées.
             generateCards(currentRecipes);
@@ -75,6 +85,9 @@ const searchInput = () => {
             displayDropdownItems(recipes, 'ustensiles', tagFiltered);
 
             currentRecipes = recipes;
+        } else {
+            // moins de 2 caractères ET TAGS en cours
+            currentRecipes = tagFilter(tagFiltered, true);
         }
     });
 };
@@ -200,9 +213,9 @@ window.addEventListener('load', () => {
 // GESTION DES TAGS
 
 //Je créé une fonction qui permet de gérer les tags.
-const tagFilter = (tagFiltered) => {
+const tagFilter = (tagFiltered, fromZero = false) => {
     //Je créé une variable qui implique les recettes.
-    let recipesFiltered = currentRecipes;
+    let recipesFiltered = fromZero ? recipes : currentRecipes;
 
     // Si le tableau de tags n'est pas vide je filtre selon les tags.
     if (tagFiltered.length !== 0) {
@@ -299,6 +312,8 @@ const tagFilter = (tagFiltered) => {
     displayDropdownItems(recipesFiltered, 'ustensiles', tagFiltered);
     //Je joue la fonction errorMessage pour les recettes filtrées.
     errorMessage(recipesFiltered);
+
+    return recipesFiltered;
 };
 
 // AJOUT DU TAG
