@@ -25,7 +25,7 @@ const searchInput = () => {
         // Si le champ de recherche contient + de 2 caracteres,
         let recipesFiltered = [];
         if (inputContent.length >= 2) {
-            console.log('Ceci est la recette courante', currentRecipes);
+            // console.log('Ceci est la recette courante', currentRecipes);
             // je filtre par item.
             recipesFiltered = recipes.filter((item) => {
                 // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
@@ -165,7 +165,7 @@ window.addEventListener('load', () => {
                 element.classList.remove('show');
             }
         });
-        //JE DOIS RETRAVAILLER CA FLECHE KO.
+
         // Pour chaque fleche up:
         document.querySelectorAll('.dropbtn .fa-chevron-up').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
@@ -174,7 +174,7 @@ window.addEventListener('load', () => {
                 element.classList.add('hide');
             }
         });
-        //JE DOIS RETRAVAILLER CA FLECHE KO.
+
         // Pour chaque fleche down.
         document.querySelectorAll('.dropbtn .fa-chevron-down').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
@@ -281,6 +281,7 @@ const tagFilter = (tagFiltered, fromZero = false) => {
     // Sinon, (si le tableau de tags est vide) je réutilise recipes.
     else {
         recipesFiltered = currentRecipes;
+        // currentRecipes = tagFilter(tagFiltered, true);
     }
 
     // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
@@ -375,6 +376,7 @@ const removeTag = (type, value) => {
     //On joue la fonction tagfilter.
     if (tagFiltered.length != 0) {
         tagFilter(tagFiltered);
+        currentRecipes = tagFilter(tagFiltered, true);
         displayRecipes(currentRecipes);
 
         displayDropdownItems(currentRecipes, 'ingredients', tagFiltered);
@@ -390,7 +392,8 @@ const removeTag = (type, value) => {
         displayDropdownItems(recipes, 'appareils', tagFiltered);
 
         displayDropdownItems(recipes, 'ustensiles', tagFiltered);
-        currentRecipes = recipes;
+        // currentRecipes = recipes;
+        // currentRecipes = tagFilter(tagFiltered, true);
     }
 };
 
