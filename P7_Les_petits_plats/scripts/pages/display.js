@@ -385,6 +385,7 @@ const removeTag = (type, value) => {
     //On joue la fonction tagfilter.
     if (tagFiltered.length != 0) {
         tagFilter(tagFiltered);
+        currentRecipes = tagFilter(tagFiltered, true);
         displayRecipes(currentRecipes);
 
         displayDropdownItems(currentRecipes, 'ingredients', tagFiltered);
