@@ -28,7 +28,7 @@ const searchInput = () => {
             console.log('Ceci est la recette courante', currentRecipes);
             // je filtre par item.
             // filter en for ou while ou do while ou autre
-            for(item of recipes) {
+            for (item of recipes) {
                 if (
                     normalizeString(item.name).includes(inputContent) ||
                     normalizeString(item.description).includes(inputContent) ||
@@ -43,12 +43,12 @@ const searchInput = () => {
                     errorMessage(currentRecipes);
                 }
             }
-                // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
-                
+            // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
+
             currentRecipes = new Set(currentRecipes);
             // filter en for ou while ou do while ou autre
             const tmp = [];
-            for(recipe of new Set([...recipesFiltered])) {
+            for (recipe of new Set([...recipesFiltered])) {
                 if (currentRecipes.has(recipe)) {
                     tmp.push(recipe);
                 }
@@ -175,7 +175,7 @@ window.addEventListener('load', () => {
                 element.classList.remove('show');
             }
         });
-        //JE DOIS RETRAVAILLER CA FLECHE KO.
+
         // Pour chaque fleche up:
         document.querySelectorAll('.dropbtn .fa-chevron-up').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
@@ -184,7 +184,7 @@ window.addEventListener('load', () => {
                 element.classList.add('hide');
             }
         });
-        //JE DOIS RETRAVAILLER CA FLECHE KO.
+
         // Pour chaque fleche down.
         document.querySelectorAll('.dropbtn .fa-chevron-down').forEach((element) => {
             // Je ferme toute liste déroulante qui n'est pas celle sur laquelle on vient de cliquer.
@@ -400,7 +400,6 @@ const removeTag = (type, value) => {
         displayDropdownItems(recipes, 'appareils', tagFiltered);
 
         displayDropdownItems(recipes, 'ustensiles', tagFiltered);
-        currentRecipes = recipes;
     }
 };
 
