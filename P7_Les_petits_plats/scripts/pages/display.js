@@ -392,8 +392,6 @@ const removeTag = (type, value) => {
         displayDropdownItems(recipes, 'appareils', tagFiltered);
 
         displayDropdownItems(recipes, 'ustensiles', tagFiltered);
-        // currentRecipes = recipes;
-        // currentRecipes = tagFilter(tagFiltered, true);
     }
 };
 
