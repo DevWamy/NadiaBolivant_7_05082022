@@ -25,7 +25,6 @@ const searchInput = () => {
         // Si le champ de recherche contient + de 2 caracteres,
         let recipesFiltered = [];
         if (inputContent.length >= 2) {
-            // console.log('Ceci est la recette courante', currentRecipes);
             // je filtre par item.
             recipesFiltered = recipes.filter((item) => {
                 // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
@@ -43,6 +42,7 @@ const searchInput = () => {
                     errorMessage(currentRecipes);
                 }
             });
+            //J'affine le filtrage avec de nouveaux tableaux.
             currentRecipes = new Set(currentRecipes);
             currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
             currentRecipes = [...currentRecipes];
@@ -273,6 +273,7 @@ const tagFilter = (tagFiltered, fromZero = false) => {
                     }
                 }
             });
+            //J'affine le filtrage avec de nouveaux tableaux.
             currentRecipes = new Set(currentRecipes);
             currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
             currentRecipes = [...currentRecipes];
@@ -339,10 +340,7 @@ const addTag = (itemTag, type) => {
     let currentTag = document.querySelector('.filtres-actifs');
     //Et il herite de tagItemDOM.
     currentTag.appendChild(tagItemDOM);
-    // const crossItemDOM = document.createElement('i');
-    // crossItemDOM.classList = 'bi bi-x-circle';
-    // tagItemDOM.innerHTML = `${itemTag} &nbsp`;
-    // tagItemDOM.appendChild(crossItemDOM);
+    //Quand je clique sur la croix le tag se retire.
     crossItemDOM.addEventListener('click', () => {
         removeTag(type, itemTag);
     });
@@ -362,7 +360,7 @@ const removeTag = (type, value) => {
     //Je met tout en minuscules.
     value = value.toLowerCase();
 
-    //je cree une variable qui correspond aux valeurs normalisées (sans espaces, minusculles, sans accents...)
+    //Je cree une variable qui correspond aux valeurs normalisées (sans espaces, minusculles, sans accents...)
     valueClass = normalizeString(value);
 
     //Je recherche les elements qui se trouvent dans filtres-actifs, dans tag- j'ajoute la valueClass et je supprime.

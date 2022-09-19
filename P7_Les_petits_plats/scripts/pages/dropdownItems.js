@@ -155,8 +155,8 @@ const displayDropdownItems = (recipes, types, tagFiltered) => {
     }
 };
 
-// ENTONOIR DE RECHERCHE INGREDIENT APPAREIL USTENSILES DANS LE DROPDOWN
-// rafraichi les ingredients en entonoir en cherchant par mot clé dans le dropdown
+// ENTONNOIR DE RECHERCHE INGREDIENT APPAREIL USTENSILES DANS LE DROPDOWN
+// Rafraicht les ingredients en entonnoir en cherchant par mot clé dans le dropdown.
 const inputSearchIngredient = () => {
     // A l'input dans le dropdown ingrédients:
     inputIngredient.addEventListener('input', () => {
@@ -183,7 +183,7 @@ const inputSearchIngredient = () => {
 };
 inputSearchIngredient();
 
-// rafraichi les appareils en entonoir en cherchant par mot clé dans le dropdown
+// Rafraichit les appareils en entonoir en cherchant par mot clé dans le dropdown
 const inputSearchAppareils = () => {
     // A l'input dans le dropdown appareils:
     inputAppareils.addEventListener('input', function () {
@@ -208,7 +208,7 @@ const inputSearchAppareils = () => {
 };
 inputSearchAppareils();
 
-// Rafraichi les ustensiles en entonoir en chechant par mot clé dans le dropdown.
+// Rafraichit les ustensiles en entonoir en chechant par mot clé dans le dropdown.
 const inputSearchUstensiles = () => {
     //  A l'input dans le dropdown ustensiles.
     inputUstensiles.addEventListener('input', function () {
