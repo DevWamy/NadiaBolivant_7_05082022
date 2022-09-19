@@ -3,13 +3,13 @@ let dropIngredients = document.querySelector('#ingredients');
 let dropUstensiles = document.querySelector('#ustensiles');
 let dropAppareils = document.querySelector('#appareils');
 
-// je récupere le champ de recherche ingredient
+// Je récupere le champ de recherche ingredient
 let inputIngredient = document.querySelector('#input-ingredients');
 
-// je récupere le champ de recherche appareil
+// Je récupere le champ de recherche appareil
 let inputAppareils = document.querySelector('#input-appareils');
 
-// je récupere le champ de recherche ustensile
+// Je récupere le champ de recherche ustensile
 let inputUstensiles = document.querySelector('#input-ustensiles');
 
 // J'initialise un tableau vide qui contiendra la liste des ingrédients.
@@ -22,7 +22,7 @@ let tabAppareils = [];
 let tabUstensiles = [];
 
 // AFFICHAGE INITIAL
-// affichage des items dans leurs dropdown respectifs
+// Affichage des items dans leurs dropdown respectifs
 const displayDropdownItems = (recipes, types, tagFiltered) => {
     //J'évalue les types.
     switch (types) {
@@ -155,8 +155,8 @@ const displayDropdownItems = (recipes, types, tagFiltered) => {
     }
 };
 
-// ENTONOIR DE RECHERCHE INGREDIENT APPAREIL USTENSILES DANS LE DROPDOWN
-// rafraichi les ingredients en entonoir en cherchant par mot clé dans le dropdown
+// ENTONNOIR DE RECHERCHE INGREDIENT APPAREIL USTENSILES DANS LE DROPDOWN
+// Rafraichit les ingredients en entonnoir en cherchant par mot clé dans le dropdown.
 const inputSearchIngredient = () => {
     // A l'input dans le dropdown ingrédients:
     inputIngredient.addEventListener('input', () => {
@@ -183,7 +183,7 @@ const inputSearchIngredient = () => {
 };
 inputSearchIngredient();
 
-// rafraichi les appareils en entonoir en cherchant par mot clé dans le dropdown
+// Rafraichit les appareils en entonoir en cherchant par mot clé dans le dropdown
 const inputSearchAppareils = () => {
     // A l'input dans le dropdown appareils:
     inputAppareils.addEventListener('input', function () {
@@ -208,7 +208,7 @@ const inputSearchAppareils = () => {
 };
 inputSearchAppareils();
 
-// Rafraichi les ustensiles en entonoir en chechant par mot clé dans le dropdown.
+// Rafraichit les ustensiles en entonoir en chechant par mot clé dans le dropdown.
 const inputSearchUstensiles = () => {
     //  A l'input dans le dropdown ustensiles.
     inputUstensiles.addEventListener('input', function () {

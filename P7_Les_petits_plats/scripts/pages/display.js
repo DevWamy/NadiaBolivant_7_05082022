@@ -26,8 +26,7 @@ const searchInput = () => {
         let recipesFiltered = [];
         if (inputContent.length >= 2) {
             console.log('Ceci est la recette courante', currentRecipes);
-            // je filtre par item.
-            // filter en for ou while ou do while ou autre
+            // Je filtre par item.
             for (item of recipes) {
                 if (
                     normalizeString(item.name).includes(inputContent) ||
@@ -44,20 +43,25 @@ const searchInput = () => {
                 }
             }
             // Si dans nom, description, ou ingredient je trouve ce qui à été tapé je retourne item.
-
+            //Les recettes en cours sont nouvellement triées
             currentRecipes = new Set(currentRecipes);
-            // filter en for ou while ou do while ou autre
+            //Nouveau tableau vide
             const tmp = [];
+            //Pour les nouvelle recettes filtrées,
             for (recipe of new Set([...recipesFiltered])) {
+                //si dans les recettes courantes il y a l'element recipe,
                 if (currentRecipes.has(recipe)) {
+                    //alors l'element recipe sera ajouté en dernier au tableau tmp.
                     tmp.push(recipe);
                 }
             }
+            //Les recettes courantes valent maintenant tmp
             currentRecipes = tmp;
+            //On copie le tableau qui aura currentRecipes du tableau tmp.
             currentRecipes = [...currentRecipes];
 
             // Je supprime les articles affichés avant de reboucler dessus et refaire un affichage filtré.
-            // forEach en for ou while ou do while ou autre
+
             for (element of document.querySelectorAll('.article-recette')) {
                 element.remove();
             }
@@ -86,7 +90,7 @@ const searchInput = () => {
 
             currentRecipes = recipes;
         } else {
-            // moins de 2 caractères ET TAGS en cours
+            // TAGS en cours
             currentRecipes = tagFilter(tagFiltered, true);
         }
     });
@@ -283,6 +287,7 @@ const tagFilter = (tagFiltered, fromZero = false) => {
                     }
                 }
             });
+            //J'affine le filtrage avec de nouveaux tableaux.
             currentRecipes = new Set(currentRecipes);
             currentRecipes = new Set([...recipesFiltered].filter((recipe) => currentRecipes.has(recipe)));
             currentRecipes = [...currentRecipes];
@@ -348,10 +353,7 @@ const addTag = (itemTag, type) => {
     let currentTag = document.querySelector('.filtres-actifs');
     //Et il herite de tagItemDOM.
     currentTag.appendChild(tagItemDOM);
-    // const crossItemDOM = document.createElement('i');
-    // crossItemDOM.classList = 'bi bi-x-circle';
-    // tagItemDOM.innerHTML = `${itemTag} &nbsp`;
-    // tagItemDOM.appendChild(crossItemDOM);
+    //Quand je clique sur la croix le tag se retire.
     crossItemDOM.addEventListener('click', () => {
         removeTag(type, itemTag);
     });
@@ -371,7 +373,7 @@ const removeTag = (type, value) => {
     //Je met tout en minuscules.
     value = value.toLowerCase();
 
-    //je cree une variable qui correspond aux valeurs normalisées (sans espaces, minusculles, sans accents...)
+    //Je cree une variable qui correspond aux valeurs normalisées (sans espaces, minusculles, sans accents...)
     valueClass = normalizeString(value);
 
     //Je recherche les elements qui se trouvent dans filtres-actifs, dans tag- j'ajoute la valueClass et je supprime.
