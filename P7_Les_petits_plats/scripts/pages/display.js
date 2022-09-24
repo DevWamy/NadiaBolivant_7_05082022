@@ -35,6 +35,7 @@ const searchInput = () => {
                         recipesFiltered.push(normalizeString(element.ingredient).includes(inputContent));
                     }) != undefined
                 ) {
+                    //Le tableau avec les nouvelles recettes est retourné.
                     recipesFiltered.push(item);
 
                     // Si il n'y a aucune recette trouvée j'affiche le message d'erreur.
