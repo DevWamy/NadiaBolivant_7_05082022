@@ -397,13 +397,13 @@ const removeTag = (type, value) => {
 
         displayDropdownItems(currentRecipes, 'ustensiles', tagFiltered);
     } else {
-        displayRecipes(recipes);
+        displayRecipes(currentRecipes);
 
-        displayDropdownItems(recipes, 'ingredients', tagFiltered);
+        displayDropdownItems(currentRecipes, 'ingredients', tagFiltered);
 
-        displayDropdownItems(recipes, 'appareils', tagFiltered);
+        displayDropdownItems(currentRecipes, 'appareils', tagFiltered);
 
-        displayDropdownItems(recipes, 'ustensiles', tagFiltered);
+        displayDropdownItems(currentRecipes, 'ustensiles', tagFiltered);
     }
 };
 
