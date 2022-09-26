@@ -3,13 +3,13 @@ let dropIngredients = document.querySelector('#ingredients');
 let dropUstensiles = document.querySelector('#ustensiles');
 let dropAppareils = document.querySelector('#appareils');
 
-// Je récupere le champ de recherche ingredient
+// je récupere le champ de recherche ingredient
 let inputIngredient = document.querySelector('#input-ingredients');
 
-// Je récupere le champ de recherche appareil
+// je récupere le champ de recherche appareil
 let inputAppareils = document.querySelector('#input-appareils');
 
-// Je récupere le champ de recherche ustensile
+// je récupere le champ de recherche ustensile
 let inputUstensiles = document.querySelector('#input-ustensiles');
 
 // J'initialise un tableau vide qui contiendra la liste des ingrédients.
@@ -22,7 +22,7 @@ let tabAppareils = [];
 let tabUstensiles = [];
 
 // AFFICHAGE INITIAL
-// Affichage des items dans leurs dropdown respectifs
+// affichage des items dans leurs dropdown respectifs
 const displayDropdownItems = (recipes, types, tagFiltered) => {
     //J'évalue les types.
     switch (types) {
@@ -156,7 +156,7 @@ const displayDropdownItems = (recipes, types, tagFiltered) => {
 };
 
 // ENTONNOIR DE RECHERCHE INGREDIENT APPAREIL USTENSILES DANS LE DROPDOWN
-// Rafraichit les ingredients en entonnoir en cherchant par mot clé dans le dropdown.
+// Rafraicht les ingredients en entonnoir en cherchant par mot clé dans le dropdown.
 const inputSearchIngredient = () => {
     // A l'input dans le dropdown ingrédients:
     inputIngredient.addEventListener('input', () => {

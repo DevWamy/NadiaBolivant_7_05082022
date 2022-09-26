@@ -71,7 +71,6 @@ const recipeCardsFactory = (recette) => {
         const listeItem = `
                 <li><strong>${varIngredient} :</strong> ${varQuantity} ${varUnit}</li>
             `;
-
         //J'insère la liste des items à l'intérieur de la liste d'ingr après le dernier affiché.
         listeIngrédients.insertAdjacentHTML('beforeEnd', listeItem);
     });
